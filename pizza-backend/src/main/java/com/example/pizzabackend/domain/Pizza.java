@@ -2,6 +2,7 @@ package com.example.pizzabackend.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
@@ -18,6 +19,7 @@ public class Pizza {
 
     @NotBlank
     @Size(max = 50)
+    @Indexed(unique=true)
     private String name;
 
     private int price;
