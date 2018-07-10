@@ -47,7 +47,7 @@ public class PizzaServiceImpl implements PizzaService {
     }
 
     @Override
-    public Optional<Pizza> updatePizza(String id, int price) {
+    public Optional<Pizza> updatePizza(@NotNull String id, int price) {
         Optional<Pizza> pizza = pizzaRepository.findById(id);
 
         if (pizza.isPresent()) {
@@ -59,7 +59,7 @@ public class PizzaServiceImpl implements PizzaService {
     }
 
     @Override
-    public void deletePizzaById(String id) {
+    public void deletePizzaById(@NotNull String id) {
         pizzaRepository.deleteById(id);
     }
 }
