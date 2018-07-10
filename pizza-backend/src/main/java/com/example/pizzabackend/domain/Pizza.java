@@ -1,4 +1,4 @@
-package com.example.pizzabackend.models;
+package com.example.pizzabackend.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
@@ -20,10 +20,18 @@ public class Pizza {
     @Size(max = 50)
     private String name;
 
+    private int price;
+
     private Date createdAt = new Date();
 
-    public Pizza(String name) {
+    public Pizza() {
+        this.name = "";
+        this.price = 0;
+    }
+
+    public Pizza(String name, int price) {
         this.name = name;
+        this.price = price;
     }
 
     public String getId() {
@@ -50,6 +58,14 @@ public class Pizza {
         this.createdAt = createdAt;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -57,12 +73,13 @@ public class Pizza {
         Pizza pizza = (Pizza) o;
         return Objects.equals(id, pizza.id) &&
                 Objects.equals(name, pizza.name) &&
+                Objects.equals(price, pizza.price) &&
                 Objects.equals(createdAt, pizza.createdAt);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, name, createdAt);
+        return Objects.hash(id, name, createdAt, price);
     }
 }
