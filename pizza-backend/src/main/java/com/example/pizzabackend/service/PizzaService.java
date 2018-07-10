@@ -1,6 +1,7 @@
 package com.example.pizzabackend.service;
 
 import com.example.pizzabackend.domain.Pizza;
+import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
