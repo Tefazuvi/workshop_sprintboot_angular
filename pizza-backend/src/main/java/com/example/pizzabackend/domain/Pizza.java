@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.Objects;
 
 @Document(collection="pizzas")
-@JsonIgnoreProperties(value = {"createdAt"}, allowGetters = true)
 public class Pizza {
 
     @Id
@@ -24,16 +23,18 @@ public class Pizza {
 
     private int price;
 
-    private Date createdAt = new Date();
+    private Date createdAt;
 
     public Pizza() {
         this.name = "";
         this.price = 0;
+        this.createdAt = new Date();
     }
 
-    public Pizza(String name, int price) {
+    public Pizza(String name, int price, Date createdAt) {
         this.name = name;
         this.price = price;
+        this.createdAt = createdAt;
     }
 
     public String getId() {
