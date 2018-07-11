@@ -25,18 +25,6 @@ public class Pizza {
 
     private Date createdAt;
 
-    public Pizza() {
-        this.name = "";
-        this.price = 0;
-        this.createdAt = new Date();
-    }
-
-    public Pizza(String name, int price, Date createdAt) {
-        this.name = name;
-        this.price = price;
-        this.createdAt = createdAt;
-    }
-
     public String getId() {
         return id;
     }
