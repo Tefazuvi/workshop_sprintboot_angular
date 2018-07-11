@@ -15,13 +15,7 @@ public class PizzaDto {
     public void setId(String id) {
         this.id = id;
     }
-
-    public PizzaDto(String id, String name, int price) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-    }
-
+    
     public String getName() {
         return name;
     }
