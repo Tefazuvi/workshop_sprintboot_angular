@@ -1,0 +1,23 @@
+<div class="pizza-content">
+  <h1 class="page-title">My Pizzas</h1>
+  <div class="pizza-create">
+    <form [formGroup]="pizzaForm" novalidate (ngSubmit)="createPizza(pizzaForm)">
+      <div class="form-group">
+        <label class="center-block">Name:
+          <input class="form-control" formControlName="name" required>
+          <div *ngIf="pizzaForm.controls['name'].errors && !pizzaForm.controls['name'].pristine" class="alert alert-danger">
+            <div [hidden]="!pizzaForm.controls['name'].errors.required">Pizza name is required.</div>
+          </div>
+        </label>
+
+        <label class="center-block">Price:
+          <input class="form-control" formControlName="price" required type="number">
+          <div *ngIf="pizzaForm.controls['price'].errors && !pizzaForm.controls['price'].pristine" class="alert alert-danger">
+              <div [hidden]="!pizzaForm.controls['price'].errors.required">Price name is required.</div>
+            </div>
+        </label>
+      </div>
+      <button type="submit" [disabled]="pizzaForm.invalid">Add a Pizza</button>
+    </form>
+  </div>
+</div>
