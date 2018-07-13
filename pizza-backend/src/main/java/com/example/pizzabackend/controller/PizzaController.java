@@ -24,7 +24,7 @@ public class PizzaController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getPizzas() {
         Optional result = pizzaService.getAllPizzas();
-        return result.isPresent() ? new ResponseEntity<>(result.get(), HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return result.isPresent() ? new ResponseEntity<>(result.get(), HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PostMapping(value = "/pizza",
@@ -40,13 +40,13 @@ public class PizzaController {
     @DeleteMapping(value = "/pizza/{pizzaId}")
     public ResponseEntity<?> deletePizza(@PathVariable("pizzaId") String pizzaId) {
         pizzaService.deletePizzaById(pizzaId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }
 
     @PatchMapping(value = "/pizza/{pizzaId}")
-    public ResponseEntity<?> updatePizzaByPrice(@PathVariable("pizzaId") String id, @RequestParam("price") int price) {
+    public ResponseEntity<?> updatePizzaByPrice(@PathVariable("pizzaId") String id, @RequestBody int price) {
         Optional result = pizzaService.updatePizza(id, price);
-        return result.isPresent() ? new ResponseEntity<>(result.get(), HttpStatus.OK) : new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+        return result.isPresent() ? new ResponseEntity<>(result.get(), HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
