@@ -34,7 +34,7 @@ public class PizzaController {
 
         pizzaService.insertPizza(pizzaDto);
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(pizzaDto,HttpStatus.CREATED);
     }
 
     @DeleteMapping(value = "/pizza/{pizzaId}")
