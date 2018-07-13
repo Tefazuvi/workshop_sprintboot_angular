@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -44,9 +44,11 @@ public class PizzaController {
 
     }
 
-    @PatchMapping(value = "/pizza/{pizzaId}")
-    public ResponseEntity<?> updatePizzaByPrice(@PathVariable("pizzaId") String id, @RequestBody int price) {
-        Optional result = pizzaService.updatePizza(id, price);
+    @PatchMapping(value = "/pizza/{pizzaId}", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updatePizzaByPrice(@PathVariable("pizzaId") String id,
+                                                @RequestBody Map<String, String> price) {
+        Optional result = pizzaService.updatePizza(id, Integer.parseInt(price.get("price")));
         return result.isPresent() ? new ResponseEntity<>(result.get(), HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
