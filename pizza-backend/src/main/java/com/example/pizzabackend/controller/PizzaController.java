@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin("*")
 public class PizzaController {
 
     @Autowired

@@ -21,24 +21,29 @@
     </form>
   </div>
 
-  <ul class="todo-list">
-    <li *ngFor="let pizza of pizzas$ | async" >
-      <div class="pizza-row" *ngIf="!editing || editingTodo.id != todo.id">
-          <a class="pizza-completed" (click)="toggleCompleted(pizza)">
-            <i class="material-icons toggle-completed-checkbox"></i> 
-          </a> 
+  <ul class="pizza-list" *ngIf="pizzas$ | async as pizzas; else noPizzas">
+    <li *ngFor="let pizza of pizzas" >
+      <div class="pizza-row" *ngIf="!editing || editingPizza.id != pizza.id">
           <span class="pizza-title">
-            {{todo.title}}
+            {{pizza.name}}
+          </span>
+
+          <span class="pizza-title">
+            {{pizza.price}}
           </span>
           <span class="pizza-actions">
-              <a (click)="editTodo(pizza)">
+              <a (click)="editPizza(pizza)">
                 <i class="material-icons edit">edit</i>
               </a>
-              <a (click)="deleteTodo(pizza.id)">
+              <a (click)="deletePizza(pizza.id)">
                 <i class="material-icons delete">clear</i>
               </a>
           </span>
       </div>
     </li>
   </ul>
+
+  <ng-template #noPizzas>
+    <p>No Pizzas Found!</p>
+  </ng-template>
 </div>

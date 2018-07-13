@@ -15,12 +15,11 @@ export class PizzaComponent implements OnInit {
   pizzaForm: FormGroup; 
   pizzas$: Observable<Pizza[]>;
   editing: boolean = false;
-  editingTodo: Pizza = new Pizza();
+  editingPizza: Pizza = new Pizza();
 
   constructor(private fb: FormBuilder, private pizzaService: PizzaService) { 
     this.createForm();
-    //this.pizzas$ = pizzaService.getPizzas();
-    //this.pizzas$.subscribe(item => console.log(item));
+    this.pizzas$ = pizzaService.getPizzas();
   }
 
   createForm() {

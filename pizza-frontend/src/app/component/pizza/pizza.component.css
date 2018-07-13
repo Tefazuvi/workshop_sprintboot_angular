@@ -148,12 +148,7 @@ body {
     content: 'check_box';
   }
   
-  li.completed .pizza-title {
-    text-decoration: line-through;
-    color: #757575;
-  }
-  
-  li.completed i {
+  li i {
     color: #757575;
   }
 
