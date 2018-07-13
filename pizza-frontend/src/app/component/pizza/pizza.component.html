@@ -21,7 +21,8 @@
     </form>
   </div>
 
-  <ul class="pizza-list" *ngIf="pizzas$ | async as pizzas; else noPizzas">
+
+  <ul class="pizza-list" *ngIf="pizzas; else noPizzas">
     <li *ngFor="let pizza of pizzas" >
       <div class="pizza-row" *ngIf="!editing || editingPizza.id != pizza.id">
           <span class="pizza-title">
@@ -40,6 +41,21 @@
               </a>
           </span>
       </div>
+
+      <div class="pizza-edit" *ngIf="editing && editingPizza.id === pizza.id">
+          <input class="form-control" type="text" 
+           [(ngModel)]="editingPizza.price" required>
+          <span class="edit-actions">
+              <a (click)="updatePizza(editingPizza)">
+                <i class="material-icons">done</i>
+              </a>
+              <a (click)="clearEditing()">
+                <i class="material-icons">clear</i>
+              </a>
+          </span>
+      </div>
+
+
     </li>
   </ul>
 

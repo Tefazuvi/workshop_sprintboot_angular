@@ -16,10 +16,13 @@ export class PizzaComponent implements OnInit {
   pizzas$: Observable<Pizza[]>;
   editing: boolean = false;
   editingPizza: Pizza = new Pizza();
+  pizzas: Pizza[];
 
   constructor(private fb: FormBuilder, private pizzaService: PizzaService) { 
     this.createForm();
-    this.pizzas$ = pizzaService.getPizzas();
+    pizzaService.getPizzas().subscribe(pizzas => {
+      this.pizzas = pizzas;
+    })
   }
 
   createForm() {
@@ -31,5 +34,40 @@ export class PizzaComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  deletePizza(id: string): void {
+    
+    this.pizzaService.deletePizza(id)
+    .subscribe(
+      () => {
+        this.pizzas = this.pizzas.filter(pizza => pizza.id != id);
+      },
+      error => console.log("Error :: " + error)
+    )
+  }
+
+  editPizza(pizza: Pizza): void {
+    this.editing = true;
+    Object.assign(this.editingPizza, pizza); 
+    console.log(this.editingPizza);
+  }
+
+
+  updatePizza(pizza: Pizza): void {
+    this.pizzaService.updatePizza(pizza,pizza.price)
+    .subscribe(updatedPizza => {
+      console.log(updatedPizza);
+      let existingTodo = this.pizzas.find(pizza => pizza.id === updatedPizza.id);
+      Object.assign(existingTodo, updatedPizza);
+      this.clearEditing();
+    });
+  }
+
+
+  clearEditing(): void {
+    this.editingPizza = new Pizza();
+    this.editing = false;
+  }
+
 
 }
