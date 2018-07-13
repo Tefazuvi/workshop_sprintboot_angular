@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { PizzaComponent } from './component/pizza/pizza.component';
+import { HttpModule }    from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { PizzaComponent } from './component/pizza/pizza.component';
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]
