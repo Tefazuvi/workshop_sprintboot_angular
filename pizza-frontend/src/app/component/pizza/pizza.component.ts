@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormControl,FormBuilder,FormGroup, Validators
+  FormControl,FormBuilder,FormGroup, Validators, NgForm
 } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Pizza } from './pizza';
@@ -49,14 +49,12 @@ export class PizzaComponent implements OnInit {
   editPizza(pizza: Pizza): void {
     this.editing = true;
     Object.assign(this.editingPizza, pizza); 
-    console.log(this.editingPizza);
   }
 
 
   updatePizza(pizza: Pizza): void {
     this.pizzaService.updatePizza(pizza,pizza.price)
     .subscribe(updatedPizza => {
-      console.log(updatedPizza);
       let existingTodo = this.pizzas.find(pizza => pizza.id === updatedPizza.id);
       Object.assign(existingTodo, updatedPizza);
       this.clearEditing();
@@ -69,5 +67,14 @@ export class PizzaComponent implements OnInit {
     this.editing = false;
   }
 
-
+  createPizza(pizzaForm: FormGroup): void {
+    var pizza: Pizza = new Pizza();
+    pizza.name = pizzaForm.get("name").value;
+    pizza.price = pizzaForm.get("price").value;
+    pizza.createdAt = new Date();
+    this.pizzaService.createPizza(pizza).subscribe(newPizza => {
+      this.pizzas.push(newPizza);
+    })
+    pizzaForm.reset();
+  }
 }
