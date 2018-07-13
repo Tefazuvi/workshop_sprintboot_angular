@@ -39,7 +39,8 @@ export class PizzaService {
   }
 
   updatePizza(pizza: Pizza, price: number): Observable<Pizza> {
-    return this.http.patch(this.baseUrl + "/pizza/" + pizza.id, price).pipe(
+    let valueToSend = {"price":price};
+    return this.http.patch(this.baseUrl + "/pizza/" + pizza.id, valueToSend).pipe(
       map((response: Response) => {
         return <Pizza>response.json();
       }),
