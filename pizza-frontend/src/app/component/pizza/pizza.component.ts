@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormControl,FormBuilder,FormGroup, Validators
 } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Pizza } from './pizza';
+import { PizzaService } from '../../services/pizza.service';
 @Component({
   selector: 'app-pizza',
   templateUrl: './pizza.component.html',
@@ -10,9 +13,14 @@ import {
 export class PizzaComponent implements OnInit {
 
   pizzaForm: FormGroup; 
+  pizzas$: Observable<Pizza[]>;
+  editing: boolean = false;
+  editingTodo: Pizza = new Pizza();
 
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder, private pizzaService: PizzaService) { 
     this.createForm();
+    //this.pizzas$ = pizzaService.getPizzas();
+    //this.pizzas$.subscribe(item => console.log(item));
   }
 
   createForm() {

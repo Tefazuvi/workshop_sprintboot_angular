@@ -20,4 +20,25 @@
       <button type="submit" [disabled]="pizzaForm.invalid">Add a Pizza</button>
     </form>
   </div>
+
+  <ul class="todo-list">
+    <li *ngFor="let pizza of pizzas$ | async" >
+      <div class="pizza-row" *ngIf="!editing || editingTodo.id != todo.id">
+          <a class="pizza-completed" (click)="toggleCompleted(pizza)">
+            <i class="material-icons toggle-completed-checkbox"></i> 
+          </a> 
+          <span class="pizza-title">
+            {{todo.title}}
+          </span>
+          <span class="pizza-actions">
+              <a (click)="editTodo(pizza)">
+                <i class="material-icons edit">edit</i>
+              </a>
+              <a (click)="deleteTodo(pizza.id)">
+                <i class="material-icons delete">clear</i>
+              </a>
+          </span>
+      </div>
+    </li>
+  </ul>
 </div>
