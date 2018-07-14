@@ -18,12 +18,7 @@ export class PizzaComponent implements OnInit {
   editingPizza: Pizza = new Pizza();
   pizzas: Pizza[];
 
-  constructor(private fb: FormBuilder, private pizzaService: PizzaService) { 
-    this.createForm();
-    pizzaService.getPizzas().subscribe(pizzas => {
-      this.pizzas = pizzas;
-    })
-  }
+  constructor(private fb: FormBuilder, private pizzaService: PizzaService) {}
 
   createForm() {
     this.pizzaForm = this.fb.group({
@@ -33,6 +28,10 @@ export class PizzaComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.createForm();
+    this.pizzaService.getPizzas().subscribe(pizzas => {
+      this.pizzas = pizzas;
+    })
   }
 
   deletePizza(id: string): void {
